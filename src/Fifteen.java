@@ -8,8 +8,7 @@ import java.io.IOException;
  * Application Interface Class.
  * @author Dmitriy Stepanov
  */
-public class GraphicInterface {
-
+public class Fifteen {
     /** Static variables for defining the font */
     private static final Font bFont = new Font("Verdana", Font.BOLD, 11);
     private static final Font bFont2 = new Font("Verdana", Font.BOLD, 18);
@@ -32,15 +31,15 @@ public class GraphicInterface {
             " back in 1874. In 1874, Noah Palmer Chapman demonstrated the game to his friends.<br></center></html>";
 
     private JFrame moreInform;
-    public static JFrame game;
-    public static BackgroundPanel bgPanel;
-    public static Image windowIcon;
+    private JFrame game;
+    private BackgroundPanel bgPanel;
+    private static Image windowIcon;
 
     /**
      * Constructor - creating the interface game
-     * @see GraphicInterface#GraphicInterface()
+     * @see Fifteen#Fifteen()
      */
-    public GraphicInterface(){
+    public Fifteen() {
         game = new JFrame("15");
         windowIcon = loadImage("/fifteen.png");
         game.setIconImage(windowIcon);
@@ -56,7 +55,6 @@ public class GraphicInterface {
         bgPanel.setImage(backImage);
 
         createMenu();   // calling the menu creation function
-
         game.add(bgPanel);
         game.setVisible(true);
     }
@@ -66,9 +64,9 @@ public class GraphicInterface {
      * @param pathImage passes the path along which the images are located
      * @return an image of the BufferedImage type
      */
-    public static BufferedImage loadImage(String pathImage){
+    public static BufferedImage loadImage(String pathImage) {
         try {
-            return ImageIO.read(GraphicInterface.class.getResource(pathImage));
+            return ImageIO.read(Fifteen.class.getResource(pathImage));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -79,7 +77,7 @@ public class GraphicInterface {
     /**
      * Create a menu game with handlers
      */
-    private void createMenu(){
+    private void createMenu() {
         JMenuBar gameMenu = new JMenuBar();
         JMenu start = new JMenu("Game");
         JMenu level = new JMenu("Select the level");
@@ -138,18 +136,17 @@ public class GraphicInterface {
                 "Do you really want to choose" +
                         " this level?", "Level Selection", JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE, iconMessage);
-
         if(size == 3){
             if(res == 0){
-                new GameLogic(size, bFont2).writeNumberTile();
+                new GameLogic(size, bFont2, bgPanel, game).writeNumberTile();
             }
         } else if(size == 4){
             if(res == 0){
-                new GameLogic(size, bFont2).writeNumberTile();
+                new GameLogic(size, bFont2, bgPanel, game).writeNumberTile();
             }
         } else {
             if(res == 0){
-                new GameLogic(size, bFont).writeNumberTile();
+                new GameLogic(size, bFont, bgPanel, game).writeNumberTile();
             }
         }
     }
@@ -161,7 +158,7 @@ public class GraphicInterface {
      * @param width the width of the window
      * @param height the height of the window
      */
-    private void informGame(String name, String text, int width, int height){
+    private void informGame(String name, String text, int width, int height) {
         moreInform = new JFrame(name);
         JLabel txtMessage = new JLabel(text);
         txtMessage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -178,13 +175,13 @@ public class GraphicInterface {
      * Adding images to the Help form
      * @param MoreInform static window
      */
-    private void addPicture(JFrame MoreInform){
+    private void addPicture(JFrame MoreInform) {
         JLabel jlImage = new JLabel(new ImageIcon(loadImage("/15.jpg")));
         MoreInform.add(jlImage);
         MoreInform.setLayout(new GridLayout(2, 1));
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(GraphicInterface::new);
+        SwingUtilities.invokeLater(Fifteen::new);
     }
 }
