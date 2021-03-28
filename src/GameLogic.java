@@ -8,13 +8,12 @@ import java.util.LinkedList;
  * @author Dmitriy Stepanov
  */
 public class GameLogic {
-    /** Static variable to retrieve the color of a button */
     private static final Color COLOR_TILE = new Color(227, 13, 239);
-    private JButton countClick;          /** number of moves */
-    private JButton pressButton;         /** pressed button on the board */
+    private JButton countClick;         
+    private JButton pressButton;         
     private JPanel board;
     private JButton[][] buttons;
-    private int buttonClick;              /** the number of movements of buttons */
+    private int buttonClick;              
     private int size;
     private int recordClick;
     private JFrame game;
@@ -68,13 +67,13 @@ public class GameLogic {
                             if (pressButton == buttons[k][l]) {
                                 setCountSteps();
                                 if (isEmptyButton(k - 1, l)) {
-                                    setTileNumber(k - 1, l);                // moving down a column
+                                    setTileNumber(k - 1, l);                
                                 } else if (isEmptyButton(k + 1, l)) {
-                                    setTileNumber(k + 1, l);                // moving up a column
+                                    setTileNumber(k + 1, l);                
                                 } else if (isEmptyButton(k, l - 1)) {
-                                    setTileNumber(k, l - 1);                // move to the left in a row
+                                    setTileNumber(k, l - 1);                
                                 } else if (isEmptyButton(k, l + 1)) {
-                                    setTileNumber(k, l + 1);                // move to the right in a row
+                                    setTileNumber(k, l + 1);                
                                 }
                                 if (checkWin()) {
                                     congratulations();
@@ -116,10 +115,6 @@ public class GameLogic {
             }
     }
 
-    /**
-     * Check the victory in the game
-     * @return true if the game is over
-     */
     private boolean checkWin() {
         int count = 1;
         for (int i = 0; i < size; i++) {
@@ -133,9 +128,6 @@ public class GameLogic {
         return true;
     }
 
-    /**
-     * Count the number of steps taken
-     */
     private void setCountSteps() {
         String txt;
         if (buttonClick == 0) {
@@ -146,12 +138,6 @@ public class GameLogic {
         countClick.setText("You did " + (buttonClick + 1) + " " + txt + "!");
     }
 
-    /**
-     * Check on an empty button
-     * @param row строка
-     * @param col столбец
-     * @return the button without a number
-     */
     private boolean isEmptyButton(int row, int col) {
         if (row < 0 || row >= size)
             return false;
@@ -160,20 +146,12 @@ public class GameLogic {
         return buttons[row][col].getText().equals("");
     }
 
-    /**
-     * Get the number of the pressed button
-     * @param row строка
-     * @param col столбец
-     */
     private void setTileNumber(int row, int col) {
         buttons[row][col].setText(pressButton.getText());
         pressButton.setText("");
         buttonClick++;
     }
 
-    /**
-     * Receive a victory message
-     */
     private void congratulations() {
         String recordText;
         if (buttonClick < recordClick) {
