@@ -9,15 +9,12 @@ import java.io.IOException;
  * @author Dmitriy Stepanov
  */
 public class Fifteen {
-    /** Static variables for defining the font */
     private static final Font bFont = new Font("Verdana", Font.BOLD, 11);
     private static final Font bFont2 = new Font("Verdana", Font.BOLD, 18);
 
-    /** Static variables to determine the parameters of the application window */
     private static final int WIDTH = 300;
     private static final int HEIGHT = 450;
 
-    /** Static variables for game information, in particular for game items: Help and About the game */
     private static final String TITLE_HELP = "Help";
     private static final String TXTHELP = "<html><center><H2>Help</H2></center><br>" +
             "<center>The goal of the game is to arrange or move the knuckles from left to right in ascending order in " +
@@ -74,9 +71,6 @@ public class Fifteen {
         return null;
     }
 
-    /**
-     * Create a menu game with handlers
-     */
     private void createMenu() {
         JMenuBar gameMenu = new JMenuBar();
         JMenu start = new JMenu("Game");
@@ -126,10 +120,6 @@ public class Fifteen {
         game.setJMenuBar(gameMenu);
     }
 
-    /**
-     * Receive a warning message before choosing the difficulty of the game
-     * @param size field size
-     */
     private void informMessage(int size) {
         ImageIcon iconMessage = new ImageIcon(loadImage("/warn.png"));
         int res = JOptionPane.showConfirmDialog(null,
@@ -151,13 +141,6 @@ public class Fifteen {
         }
     }
 
-    /**
-     * Template form for the Help and About the Game forms
-     * @param name window title
-     * @param text message text
-     * @param width the width of the window
-     * @param height the height of the window
-     */
     private void informGame(String name, String text, int width, int height) {
         moreInform = new JFrame(name);
         JLabel txtMessage = new JLabel(text);
@@ -171,10 +154,6 @@ public class Fifteen {
         moreInform.add(txtMessage);
     }
 
-    /**
-     * Adding images to the Help form
-     * @param MoreInform static window
-     */
     private void addPicture(JFrame MoreInform) {
         JLabel jlImage = new JLabel(new ImageIcon(loadImage("/15.jpg")));
         MoreInform.add(jlImage);
